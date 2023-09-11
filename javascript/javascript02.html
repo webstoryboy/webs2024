@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데이터 불러오기</title>
+
+    <link rel="stylesheet" href="https://webfontworld.github.io/gmarket/GmarketSans.css">
+    <link rel="stylesheet" href="https://websfont.github.io/nanumSquareNeo/nanumSquareNeo.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../assets/css/default.min.css">
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+            <h1>
+                <a href="index.html">javascript</a>
+            </h1>
+            <nav>
+                <ul>
+                    <li><a href="javascript01.html">데이터 저장하기</a></li>
+                    <li class="active"><a href="javascript02.html">데이터 불러오기</a></li>
+                    <li><a href="javascript03.html">데이터 실행하기</a></li>
+                    <li><a href="javascript04.html">데이터 제어하기</a></li>
+                </ul>
+                <ul>
+                    <li><a href="javascript05.html">문자열 객체</a></li>
+                    <li><a href="javascript06.html">배열 객체</a></li>
+                    <li><a href="javascript07.html">수학 객체</a></li>
+                    <li><a href="javascript08.html">브라우저 객체</a></li>
+                    <li><a href="javascript09.html">요소 객체</a></li>
+                    <li><a href="javascript10.html">이벤트 객체</a></li>
+                </ul>
+                <ul>
+                    <li><a href="javascript11.html">데이터 효과</a></li>
+                    <li><a href="javascript12.html">퀴즈 효과</a></li>
+                    <li><a href="javascript13.html">마우스 효과</a></li>
+                    <li><a href="javascript14.html">슬라이드 효과</a></li>
+                </ul>
+            </nav>
+        </header>
+        <!-- //header -->
+
+        <main id="main">
+            <div class="main__menu">
+                <ul>
+                    <li><a href="#sample01">01. 변수 : 데이터 불러오기</a></li>
+                    <li><a href="#sample02">02. 상수 : 데이터 불러오기</a></li>
+                    <li><a href="#sample03">03. 배열 : 데이터 불러오기</a></li>
+                    <li><a href="#sample04">04. 배열 : 데이터 갯수 불러오기</a></li>
+                    <li><a href="#sample05">05. 배열 : 데이터 불러오기 : for()</a></li>
+                    <li><a href="#sample06">06. 배열 : 데이터 불러오기 : forEach()</a></li>
+                    <li><a href="#sample07">07. 배열 : 데이터 불러오기 : for of</a></li>
+                    <li><a href="#sample08">08. 배열 : 데이터 불러오기 : for in</a></li>
+                    <li><a href="#sample09">09. 배열 : 데이터 불러오기 : map()</a></li>
+                    <li><a href="#sample10">10. 배열 : 데이터 불러오기 : filter()</a></li>
+                    <li><a href="#sample11">11. 배열 : 데이터 불러오기 : 배열 펼침 연산자</a></li>
+                    <li><a href="#sample12">12. 배열 : 데이터 불러오기 : 배열 구조 분해 할당</a></li>
+                    <li><a href="#sample13">13. 객체 : 데이터 불러오기</a></li>
+                    <li><a href="#sample14">14. 객체 : 데이터 불러오기 : Object.keys()</a></li>
+                    <li><a href="#sample15">15. 객체 : 데이터 불러오기 : Object.values()</a></li>
+                    <li><a href="#sample16">16. 객체 : 데이터 불러오기 : Object.entries()</a></li>
+                    <li><a href="#sample17">17. 객체 : 데이터 불러오기 : hasOwnProperty()</a></li>
+                    <li><a href="#sample18">18. 객체 : 데이터 불러오기 : for in</a></li>
+                    <li><a href="#sample19">19. 객체 : 데이터 불러오기 : 객체 펼침 연산자</a></li>
+                    <li><a href="#sample20">20. 객체 : 데이터 불러오기 : 객체 구조 분해 할당</a></li>
+                </ul>
+            </div>
+            <!-- //main__menu -->
+        </main>
+        <!-- //main -->
+
+        <footer id="footer">
+            <a href="mailto:webstoryboy@naver.com">webstoryboy@naver.com</a>
+        </footer>
+        <!-- //footer -->
+    </div>
+
+    <!-- script -->
+    <script src="../assets/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        // 01. 변수 : 데이터 불러오기
+        {
+            let x = 100, y = 200, z = "javascript";
+
+            console.log("01 : " + x, y, z);
+        }
+
+        // 02. 상수 : 데이터 불러오기
+        {
+            const x = 100, y = 200, z = "javascript";
+
+            console.log("02 : " + x, y, z);
+        }
+
+        // 03. 배열 : 데이터 불러오기
+        {
+            const arr = [100, 200, "javascript"];
+
+            console.log("03 : " + arr[0], arr[1], arr[2]);
+        }
+
+        // 04. 배열 : 데이터 갯수 불러오기
+        {
+            const arr = [100, 200, "javascript"];
+
+            console.log("04 : " + arr.length);
+        }
+
+        // 05. 배열 : 데이터 불러오기 : for()
+        {
+            const arr = [100, 200, "javascript"];
+
+            for(let i=0; i<arr.length; i++){
+                console.log("05 : " + arr[i]);
+            }
+        }
+
+        // 06. 배열 : 데이터 불러오기 : forEach()
+        {
+            const arr = [100, 200, "javascript"];
+
+            arr.forEach((el, index, array) => {
+                console.log("06 : " + el + " : " + index + " : " + array);
+            });
+        }
+
+        // 07. 배열 : 데이터 불러오기 : for of
+        {
+            const arr = [100, 200, "javascript"];
+
+            for(let el of arr){
+                console.log("07 : " + el);
+            }
+        }
+
+        // 08. 배열 : 데이터 불러오기 : for in
+        {
+            const arr = [100, 200, "javascript"];
+
+            for(let el in arr){
+                console.log("08 : " + el + " : " + arr[el]);
+            }
+        }
+
+        // 09. 배열 : 데이터 불러오기 : map()
+        {
+            const arr = [100, 200, "javascript"];
+
+            arr.map(function(el, index, array){
+                console.log("09 : " + el + " : " + index + " : " + array);
+            });
+
+            const arrNum = arr.map((el) => {
+                return el;
+            });
+
+            console.log("09 : " + arrNum);
+        }
+
+        // 10. 배열 : 데이터 불러오기 : filter()
+        {
+            const arr = [100, 200, "javascript"];
+
+            arr.filter(function(el, index, array){
+                console.log("10 : " + el + " : " + index + " : " + array);
+            });
+
+            const arrNum = arr.filter((el) => {
+                return el > 150;
+            });
+
+            const arrNum2 = arr.filter(el => {
+                return el > 150;
+            });
+
+            const arrNum3 = arr.filter(el => el > 150);
+
+            console.log(arrNum3);
+        }
+
+        // 11. 배열 : 데이터 불러오기 : 배열 펼침 연산자
+        {
+            // 배열 펼침 연산
+            const arr1 = [100, 200, 300];
+            const arr2 = [400, 500, 600];
+
+            console.log(arr1);                  //100,200,300
+            console.log(...arr1);               //100 200 300
+            console.log(arr1 + arr2);           //100,200,300400,500,600
+            console.log(...arr1, ...arr2);      //100 200 300 400 500 600  --> concat()
+            console.log(...arr1, 400);          //100 200 300 400  --> push()
+            console.log(...arr1.slice(0,2));    //100 200   --> slice()
+
+            // 함수 호출시 인수 전달
+            function addNum(a, b, c){
+                return a + b + c;
+            }
+            const num = [100, 200, 300];
+            const sum = addNum(...num);
+            console.log(sum)
+        }
+
+        // 12. 배열 : 데이터 불러오기 : 배열 구조 분해 할당
+        {
+            // 단일 배열에서 구조 분해 할당
+            const [a, b, c] = [100, 200, 300];
+
+            console.log(a);
+            console.log(b);
+            console.log(c);
+
+            // 기존 배열에서 구조 분해 할당
+            const arr = [100, 200, 300];
+            const [x, y, z] = arr;
+
+            console.log(x);
+            console.log(y);
+            console.log(z);
+
+            // 나머지 요소 추출 분해 할당
+            const num = [100, 200, 300, 400, 500];
+            const [num1, num2, ...rest] = num;
+
+            console.log(num1);
+            console.log(num2);
+            console.log(...rest);
+            console.log(rest);
+        }
+    </script>
+</body>
+</html>
