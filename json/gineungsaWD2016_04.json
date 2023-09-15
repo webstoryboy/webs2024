@@ -258,12 +258,12 @@
         "subject": "웹디자인 기능사",
         "question": "HTML 문서의 시작을 알려주는 태그는?",
         "incorrect_answers": [
-            "<begin>",
-            "<body>",
-            "<start>"
+            "&lt;begin&gt;",
+            "&lt;body&gt;",
+            "&lt;start&gt;"
         ],
-        "correct_answer": "<html>",
-        "desc": "HTML 문서의 시작을 알려주는 태그는 <html> 입니다."
+        "correct_answer": "&lt;html&gt;",
+        "desc": "HTML 문서의 시작을 알려주는 태그는 &lt;html&gt; 입니다."
     },
     {
         "subject": "웹디자인 기능사",
@@ -412,11 +412,11 @@
         "subject": "웹디자인 기능사",
         "question": "다음 중 이미지 관련 HTML 태그가 아닌 것은?",
         "incorrect_answers": [
-            "<MAP>",
-            "<AREA>",
-            "<SELECT>"
+            "&lt;MAP&gt;",
+            "&lt;AREA&gt;",
+            "&lt;SELECT&gt;"
         ],
-        "correct_answer": "<IMG>",
+        "correct_answer": "&lt;IMG&gt;",
         "desc": "정답은 1번입니다."
     },
     {
