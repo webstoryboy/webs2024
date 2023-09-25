@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>퀴즈 이펙트07</title>
+
+    <link rel="stylesheet" href="assets/css/quiz.css">
+</head>
+<body>
+    <header id="header">
+        <h1>
+            <a href="../index.html">Quiz</a>
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="quizEffect01.html">1</a></li>
+                <li><a href="quizEffect02.html">2</a></li>
+                <li><a href="quizEffect03.html">3</a></li>
+                <li><a href="quizEffect04.html">4</a></li>
+                <li><a href="quizEffect05.html">5</a></li>
+                <li><a href="quizEffect06.html">6</a></li>
+                <li class="active"><a href="quizEffect07.html">7</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- //header -->
+
+    <main id="main">
+        <div class="cbt__select">
+            <ul>
+                <li data-time="https://webstoryboy.github.io/web2022/webs_json/gisa2020_01.json"><a href="#">2020년 1회 정보처리기사 기출문제</a></li>
+                <li data-time="https://webstoryboy.github.io/web2022/webs_json/gisa2020_03.json"><a href="#">2020년 3회 정보처리기사 기출문제</a></li>
+                <li data-time="https://webstoryboy.github.io/web2022/webs_json/gisa2020_04.json"><a href="#">2020년 4회 정보처리기사 기출문제</a></li>
+                <li data-time="https://webstoryboy.github.io/web2022/webs_json/gisa2021_01.json"><a href="#">2021년 1회 정보처리기사 기출문제</a></li>
+                <li data-time="https://webstoryboy.github.io/web2022/webs_json/gisa2021_02.json"><a href="#">2021년 2회 정보처리기사 기출문제</a></li>
+                <li data-time="https://webstoryboy.github.io/web2022/webs_json/gisa2021_03.json"><a href="#">2021년 3회 정보처리기사 기출문제</a></li>
+                <li data-time="https://webstoryboy.github.io/web2022/webs_json/gisa2022_01.json"><a href="#">2022년 1회 정보처리기사 기출문제</a></li>
+                <li data-time="https://webstoryboy.github.io/web2022/webs_json/gisa2022_02.json"><a href="#">2022년 2회 정보처리기사 기출문제</a></li>
+            </ul>
+        </div>
+        <div class="cbt__wrap">
+            <div class="cbt__header">
+                <div class="title">2020년 1회 정보처리기사 기출문제</div>
+                <div>
+                    <div class="time">남은 시간 <span id="cbtTime">60분 00초</span></div>
+                    <div class="submit">답안지 제출하기</div>
+                </div>
+            </div>
+            <div class="cbt__conts">
+                <div class="cbt__quiz">
+                    
+                </div>
+            </div>
+            <div class="cbt__aside">
+                <div class="cbt__info">
+                    <div class="title">
+                        <em>수험자 : 황상연</em>
+                        <div>90/100</div>
+                    </div>
+                    <div class="desc">
+                        <ul>
+                            <li><a href="#">과목1 : 소프트웨어 설계</a></li>
+                            <li><a href="#">과목2 : 데이터베이스 개발</a></li>
+                            <li><a href="#">과목3 : 데이터베이스 구축</a></li>
+                            <li><a href="#">과목4 : 프로그래밍 언어 활용</a></li>
+                            <li><a href="#">과목5 : 정보시스템 구축관리</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cbt__omr"></div>
+            </div>
+        </div>
+    </main>
+    <!-- //main -->
+
+    <footer id="footer">
+        <a href="mailto:webstoryboy@naver.com">webstoryboy@naver.com</a>
+    </footer>
+    <!-- //footer -->
+
+    <script>
+        // 선택자 
+        const cbtSelect = document.querySelectorAll(".cbt__select ul li");
+        const cbtWrap = document.querySelector(".cbt__wrap");
+
+        const cbtQuiz = document.querySelector(".cbt__quiz");
+        const cbtQuizCbt = document.querySelectorAll(".cbt__quiz .cbt");
+        const cbtOmr = document.querySelector(".cbt__omr");
+        const cbtTime = document.getElementById("cbtTime");
+        const cbtSubmit = document.querySelector(".cbt__header .submit");
+
+        let questionCounter = 0;    //퀴즈 카운트
+        let questionScore = 0;      //퀴즈 점수
+        let questionAttempt = 0;    //퀴즈 시도 
+        let questionCorrect = 0;    //맞은 갯수
+        let quiztime = "";
+        let quiztitle = "";
+
+        let questionAll = [];           //모든 퀴즈 문제
+        let questionAvailable = [];     //이용가능한 퀴즈 문제
+        let questionCurrent = {}        //현재 문제
+        let remainingTime = 3600;
+
+        cbtSelect.forEach(select => {
+            select.addEventListener("click", () => {
+                quiztime = select.dataset.time;
+                quiztitle = select.innerText;
+                dataQuestion(quiztime);
+                alert(quiztitle+"시작됩니다. 제한 시간은 60분이며... 확인을 누르면 바로 시작됩니다.");
+                cbtWrap.style.display = "block";
+            });
+        });
+
+        // 데이터 가져오기
+        const dataQuestion = (time) => {
+            fetch(time)
+            .then(res => res.json())
+            .then(items => {
+                questionAll = items.map((item, index) => {
+                    const formattedQuestion = {
+                        question: item.question,
+                    };
+                    formattedQuestion.number = index + 1;
+                    const answerChoices = [...item.incorrect_answers];   
+
+                    formattedQuestion.answer = Math.floor(Math.random() * answerChoices.length) + 1;  
+                    answerChoices.splice(formattedQuestion.answer - 1, 0, item.correct_answer); 
+                    answerChoices.forEach((choice, index) => {
+                        formattedQuestion["choice" + (index + 1)] = choice;
+                    });
+                    formattedQuestion.choiceLength = answerChoices.length;    
+
+                    if(item.hasOwnProperty("desc")){      
+                        formattedQuestion.desc = item.desc;
+                    }
+                    if(item.hasOwnProperty("question_desc")){       
+                        formattedQuestion.question_desc = item.question_desc;
+                    }
+                    if(item.hasOwnProperty("question_img")){     
+                        const src = "<img src='https://webstoryboy.github.io/web2022/webs_img/";
+                        formattedQuestion.question_img = src + item.question_img + ".jpg' alt='정보처리기사' />";
+                    }
+                    if(item.hasOwnProperty("keyword")){       
+                        formattedQuestion.keyword = item.keyword;
+                    }
+
+                    console.log(formattedQuestion)
+                    return formattedQuestion;
+                });
+                updataQuiz();
+                displayTime();
+            })
+            .catch((err) => console.error(err));
+        }
+
+        // 문제 출력하기
+        const updataQuiz = () => {
+            const exam = [];
+            const omr = [];
+
+            questionAll.forEach((question, number) => {
+                exam.push(`
+                    <div class="cbt">
+                        <div class="cbt__question">
+                            <span class="question">${question.number}. ${question.question}</span>
+                            ${question.question_desc ? `<div class="cbt__question__desc">${question.question_desc}</div>` : ''}
+                            ${question.question_img ? `<div class="cbt__question__img">${question.question_img}</div>` : ''}
+                        </div>
+                        
+                        <div class="cbt__selects">
+                            <input type="radio" id="select${number}_1" class="select" name="select${number}" value="${number}_0" onclick="answerSelect2(this)">
+                            <label for="select${number}_1"><span class="choice">${question.choice1}</span></label>
+
+                            <input type="radio" id="select${number}_2" class="select" name="select${number}" value="${number}_1" onclick="answerSelect2(this)">
+                            <label for="select${number}_2"><span class="choice">${question.choice2}</span></label>
+                            
+                            <input type="radio" id="select${number}_3" class="select" name="select${number}" value="${number}_2" onclick="answerSelect2(this)">
+                            <label for="select${number}_3"><span class="choice">${question.choice3}</span></label>
+                            
+                            <input type="radio" id="select${number}_4" class="select" name="select${number}" value="${number}_3" onclick="answerSelect2(this)">
+                            <label for="select${number}_4"><span class="choice">${question.choice4}</span></label>
+                        </div>
+                        
+                        ${question.desc ? `<div class="cbt__desc hide">${question.desc}</div>` : ''}
+                    </div> 
+                `);
+
+                omr.push(`
+                    <div class="omr">
+                        <strong>${question.number}</strong>
+                        <input type="radio" name="omr${number}" id="omr${number}_1" value="${number}_0" onclick="answerSelect(this)">
+                        <label for="omr${number}_1"><span class="label-inner">1</span></label>
+                        <input type="radio" name="omr${number}" id="omr${number}_2" value="${number}_1" onclick="answerSelect(this)">
+                        <label for="omr${number}_2"><span class="label-inner">2</span></label>
+                        <input type="radio" name="omr${number}" id="omr${number}_3" value="${number}_2" onclick="answerSelect(this)">
+                        <label for="omr${number}_3"><span class="label-inner">3</span></label>
+                        <input type="radio" name="omr${number}" id="omr${number}_4" value="${number}_3" onclick="answerSelect(this)">
+                        <label for="omr${number}_4"><span class="label-inner">4</span></label>
+                    </div>
+                `);
+            })
+            
+            cbtQuiz.innerHTML = exam.join('');
+            cbtOmr.innerHTML = omr.join('');
+        }
+
+        // 시간 표시
+        const displayTime = () => {
+            const minutes = Math.floor(remainingTime / 60);
+            const seconds = remainingTime % 60;
+            cbtTime.textContent = `${minutes}분 ${seconds}초`;
+        }
+
+        const timerInterval = setInterval(() => {
+            if (remainingTime > 0) {
+                remainingTime--;
+                displayTime();
+            } else {
+                clearInterval(timerInterval); // 시간이 다 되면 타이머 중지
+                alert("시간이 종료되었습니다.");
+                // 여기서 다른 작업을 수행할 수 있습니다.
+            }
+        }, 1000);
+
+        //보기 체크
+        function answerSelect(elem){
+            const answer = elem.value;
+            const answerNum = answer.split("_");
+
+            const cbt = document.querySelectorAll(".cbt__quiz .cbt");
+            const label = cbt[answerNum[0]].querySelectorAll(".cbt__selects input");
+            label[answerNum[1]].checked = true;
+        }
+
+        //보기 체크2
+        function answerSelect2(elem){
+            const answer = elem.value;
+            const answerNum = answer.split("_");
+
+            const select = document.querySelectorAll(".cbt__omr .omr");
+            const label = select[answerNum[0]].querySelectorAll(".cbt__omr .omr input");
+            label[answerNum[1]].checked = true;
+        }
+
+        // 정답 확인 
+        cbtSubmit.addEventListener("click", () => {
+            const quizSelects = document.querySelectorAll(".cbt__selects");   
+            // alert("정답을 확인하겠습니까?")
+
+            questionAll.forEach((question, number) => {
+                const quizSelectsWrap = quizSelects[number];  
+                const userSelector = `input[name=select${number}]:checked`; 
+                const userAnswer = (quizSelectsWrap.querySelector(userSelector) || {}).value;
+
+                if(userAnswer == question.answer){
+                    console.log("정답");
+                } else {
+                    console.log("오답");
+                    const label = quizSelects[number].querySelectorAll("label");
+                    label[question.answer-1].classList.add("good")
+                }
+
+
+            });
+        })
+    </script>
+</body>
+</html>
